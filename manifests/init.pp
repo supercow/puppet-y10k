@@ -1,48 +1,47 @@
 # Class: y10k
 # ===========================
 #
-# Full description of class y10k here.
+# This class manages the base installation and configuration of y10k.
+#
+# It is assumed that you already have a repository configured with a package
+# called `y10k`.
 #
 # Parameters
 # ----------
 #
-# Document parameters here.
+# None
 #
-# * `sample parameter`
-# Explanation of what this parameter affects and what it defaults to.
-# e.g. "Specify one or more upstream ntp servers as an array."
-#
-# Variables
-# ----------
-#
-# Here you should define a list of variables that this module would require.
-#
-# * `sample variable`
-#  Explanation of how this variable affects the function of this class and if
-#  it has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#  External Node Classifier as a comma separated list of hostnames." (Note,
-#  global variables should be avoided in favor of class parameters as
-#  of Puppet 2.6.)
 #
 # Examples
 # --------
 #
 # @example
-#    class { 'y10k':
-#      servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
-#    }
+#   include y10k
 #
 # Authors
 # -------
 #
-# Author Name <author@domain.com>
+# James Sweeny <james@sweeny.io>
 #
-# Copyright
-# ---------
-#
-# Copyright 2015 Your name here, unless otherwise noted.
-#
-class y10k {
+class y10k(
+  $config_file = '/etc/y10k.conf',
+  $prefix      = '/var/www/yum',
+) {
 
+  # Pre-requisites
+  ensure_packages(['yum-utils','createrepo'])
 
+  package { 'y10k':
+    ensure => 'present',
+  }
+
+  concat { $config_file:
+    ensure => present,
+  }
+
+  concat::fragment { 'y10k base config':
+    target  => $config_file,
+    content => template('y10k/global.erb'),
+    order   => '000'
+  }
 }
