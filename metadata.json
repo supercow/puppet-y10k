@@ -1,12 +1,12 @@
 {
-  "name": "supercow-y10k",
+  "name": "puppet-y10k",
   "version": "0.1.0",
   "author": "James Sweeny",
   "summary": "Manages installation, configuration, and periodic execution of y10k",
   "license": "Apache-2.0",
-  "source": "https://github.com/supercow/supercow-y10k",
-  "project_page": "https://github.com/supercow/supercow-y10k",
-  "issues_url": "https://github.com/supercow/supercow-y10k/issues",
+  "source": "https://github.com/supercow/puppet-y10k",
+  "project_page": "https://github.com/supercow/puppet-y10k",
+  "issues_url": "https://github.com/supercow/puppet-y10k/issues",
   "dependencies": [
     {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
   ]
