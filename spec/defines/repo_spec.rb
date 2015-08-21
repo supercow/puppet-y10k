@@ -34,10 +34,12 @@ describe 'y10k::repo', :type => :define do
   let(:params) { params }
 
   config_file = '/etc/y10k.conf'
-  # Why does this work commented out?!
-  #let(:pre_condition) do
-  #  'class { "y10k": config_file => /etc/y10k.conf }'
-  #end
+  let(:pre_condition) { <<-EOF
+    class { 'y10k':
+      config_file => '#{config_file}',
+    }
+    EOF
+  }
 
   context 'with basic parameters' do
     it { should compile.with_all_deps }
