@@ -49,6 +49,7 @@ define y10k::repo(
   $interval = {},
   $mirrorlist = 'UNSET',
   $baseurl    = 'UNSET',
+  $logfile    = 'UNSET',
 ) {
 
   contain 'y10k'
@@ -63,7 +64,14 @@ define y10k::repo(
     content => template('y10k/repo.erb'),
   }
 
+  if ($logfile != 'UNSET') {
+    $log = "2>&1 ${logfile}"
+  } else {
+    $log = ''
+  }
+
   if $interval != {} {
+    $command = { 'command' => "/usr/local/bin/y10k yumfile sync ${log}" }
     create_resources('cron',{ "${name} repo sync" => $interval })
   }
 

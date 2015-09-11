@@ -55,6 +55,8 @@ describe 'y10k::repo', :type => :define do
         /#{k.to_s}=#{v}/
       )}
     end
+
+    #TODO Add tests for cron job
   end
 
   context 'with mirrorlist and baseurl unset' do
