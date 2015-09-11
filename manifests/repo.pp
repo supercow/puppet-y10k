@@ -71,7 +71,7 @@ define y10k::repo(
   }
 
   if $interval != {} {
-    $command = { 'command' => "/usr/local/bin/y10k yumfile sync ${log}" }
+    $command = { 'command' => "/usr/bin/y10k yumfile sync ${log}" }
     create_resources('cron',{ "${name} repo sync" => $interval })
   }
 
