@@ -43,14 +43,19 @@
 # James Sweeny <james@sweeny.io>
 #
 define y10k::repo(
-  $mirrorlist,
   $localpath,
   $arch,
   $deleteremoved,
   $interval = {},
+  $mirrorlist = 'UNSET',
+  $baseurl    = 'UNSET',
 ) {
 
   contain 'y10k'
+
+  if ($baseurl == 'UNSET' and $mirrorlist == 'UNSET') {
+    fail("Must set either baseurl or mirror list in Y10k::Repo['${name}']")
+  }
 
   concat::fragment { "y10k repo ${name}":
     target  => $::y10k::config_file,

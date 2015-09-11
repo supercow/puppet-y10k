@@ -57,4 +57,9 @@ describe 'y10k::repo', :type => :define do
     end
   end
 
+  context 'with mirrorlist and baseurl unset' do
+    let(:params) { params.merge({ :mirrorlist => 'UNSET', :baseurl => 'UNSET' }) }
+    it { should raise_error(Puppet::Error) }
+  end
+
 end

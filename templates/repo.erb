@@ -1,6 +1,10 @@
 [<%= @title %>]
 name=<%= @title %>
+<% if @baseurl != 'UNSET' -%>
+baseurl=<%= @baseurl %>
+<% elsif @mirrorlist != 'UNSET' -%>
 mirrorlist=<%= @mirrorlist %>
+<% end -%>
 localpath=<%= @localpath %>
 arch=<%= @arch %>
 <% if @deleteremoved -%>
